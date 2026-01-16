@@ -3,9 +3,9 @@
 ## Team:
 - **Team Name**: Team Full Stack
 - **Members**:
-- Jarone Guese
-- Christian Jorge Martin
-- Lars Sy
+ - Jarone Guese
+ - Christian Jorge Martin
+ - Lars Sy
 
 ## Project General Description:
 
@@ -18,3 +18,5 @@ As a user, I want to see what my friends are playing as of late by viewing their
 As a user, I want to be able to keep track of the latest releases or upcoming games so I could plan ahead or pre-order them.
 
 As a user, I want to view user reviews and ratings for games to determine if I should try it out or buy it.
+
+As a user, I want to be able to view my friends wishlist so that I can get gift ideas for them.
