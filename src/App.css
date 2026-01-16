@@ -43,7 +43,8 @@
 
 /* FOOTER */
 footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
 }
