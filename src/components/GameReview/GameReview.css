@@ -1,0 +1,79 @@
+.game-review {
+  background: #0f141a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #d1d5db;
+  text-align: left;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-card {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  background: #374151;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.rating {
+  color: #f43f5e;
+  font-size: 0.9rem;
+}
+
+.platform {
+  display: block;
+  font-size: 0.8rem;
+  color: #22c55e;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.review-text {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+}
+
+.review-footer {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.open-review {
+  background: none;
+  border: none;
+  color: #60a5fa;
+  cursor: pointer;
+  padding: 0;
+}
