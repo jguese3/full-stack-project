@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
