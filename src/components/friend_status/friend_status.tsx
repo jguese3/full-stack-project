@@ -1,26 +1,27 @@
+import "./friend_status.css"
 const users = [ {
     id: "0",
     username: "lsy",
     status: "added",
     game: "God Of War",
-    imageId: "",
+    imageId: "oHQBJBt",
 }, {
     id: "1",
     username: "jguese",
     status: "added",
     game: "Deadlock",
-    imageId: "",
+    imageId: "57Kxegd",
 }, {
     id: "2",
     username: "cmartin",
     status: "removed",
     game: "GTA VI",
-    imageId: "",
+    imageId: "ZZgRrQC",
 }
 ]
 
 // Builds image url based on user image id
-function getImageUrl(user) {
+function getImageUrl(user: any) {
     return (
         "https://i.imgur.com/" +
         user.imageId +
@@ -28,6 +29,23 @@ function getImageUrl(user) {
     );
 }
 
+const statusMessage = (status: any) =>
+    status === "added" ? "to" : "from";
+
 export function FriendStatus() {
-    const listFriend = 
+    const listFriend = users.map(user =>
+        <li key={user.id}>
+            <img
+                src={getImageUrl(user)}
+                alt={user.username}
+            />
+            <p>
+                <b>{user.username}</b>
+                {" " + user.status + " " + 
+                " " + user.game + " " +
+                statusMessage(user.status) + " their library"}
+            </p>
+        </li>
+    );
+    return <ul>{listFriend}</ul>;
 }
