@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>full-stack-project</title>
+    <!-- link to stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+  <div class="layout">
+    <!-- Sidebar Nav  -->
+    <aside class="sidebar">
+      <div class="logo">GameTracker</div>
+      <nav class="nav">
+        <a class="active" href="#">Home</a>
+        <a href="#">Collection</a>
+      </nav>
+    </aside>
+
+    <!-- Main layout-->
+    <main class="main">
+      <div class="welcome">
+        <h1>Welcome back, Gamer!</h1>
+        <p>Track your gaming journey and manage your collection</p>
+      </div>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div>
+            <h3>Total Games</h3>
+            <p>0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <h3>Completed</h3>
+            <p>0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <h3>Playing</h3>
+            <p>0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div>
+            <h3>Completion Rate</h3>
+            <p>0%</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Recent Activity</h2>
+          <a href="#">View All →</a>
+        </div>
+        <div class="empty">
+          <p>No games in your collection yet</p>
+          <button>Add Your First Game</button>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <div class="card action">
+          <div>
+            <h3>Manage Collection</h3>
+            <p>Add, edit, or organize your games</p>
+          </div>
+        </div>
+        <div class="card action">
+          <div>
+            <h3>Backlog Games</h3>
+            <p>0 games waiting to be played</p>
+          </div>
+        </div>
+      </section>
+    </main>
+</body>
+</html>
