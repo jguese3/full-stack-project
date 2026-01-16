@@ -43,7 +43,7 @@ export function FriendStatus() {
                 <b>{user.username}</b>
                 {" " + user.status + " " + 
                 " " + user.game + " " +
-                statusMessage(user.status) + " their library"}
+                statusMessage(user.status) + " their library."}
             </p>
         </li>
     );
