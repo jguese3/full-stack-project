@@ -4,8 +4,7 @@ const currentYear = new Date().getFullYear();
 export function Footer() {
     return(
     <footer>
-        <p>Team Full Stack &#169; {currentYear}</p>
-        <p>Team Members: {members.join(", ")}</p>
+        <p>Team Full Stack &#169; {currentYear} Members: {members.join(", ")}</p>
     </footer>
     );
 }
