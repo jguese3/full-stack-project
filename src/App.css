@@ -5,40 +5,77 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.game-review {
+  background: #0f141a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #d1d5db;
+  text-align: left;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.section-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #ffffff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.card {
-  padding: 2em;
+.review-card {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #1f2937;
 }
 
-.read-the-docs {
-  color: #888;
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.rating {
+  color: #f43f5e;
+  font-size: 0.9rem;
+}
+
+.platform {
+  display: block;
+  font-size: 0.8rem;
+  color: #22c55e;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.review-text {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+}
+
+.review-footer {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.open-review {
+  background: none;
+  border: none;
+  color: #60a5fa;
+  cursor: pointer;
+  padding: 0;
 }
 
 /* FOOTER */
