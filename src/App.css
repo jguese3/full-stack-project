@@ -77,14 +77,6 @@ h2 {
   border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  color: #ffffff;
-  font-weight: 600;
-}
-
 .review-list {
   list-style: none;
   padding: 0;
@@ -100,24 +92,11 @@ h2 {
   transition: all 0.3s ease;
 }
 
-.review-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: #374151;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
 .review-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.75rem;
-}
-
-.meta {
-  font-size: 0.95rem;
-  color: #9ca3af;
-  font-weight: 500;
 }
 
 .rating {
@@ -129,25 +108,10 @@ h2 {
   gap: 0.25rem;
 }
 
-.platform {
-  display: block;
-  font-size: 0.85rem;
-  color: #22c55e;
-  margin-top: 0.25rem;
-  font-weight: 500;
-}
-
 .date {
   font-size: 0.8rem;
   color: #6b7280;
   margin-top: 0.5rem;
-}
-
-.review-text {
-  margin: 1rem 0;
-  line-height: 1.6;
-  color: #e5e7eb;
-  font-size: 1rem;
 }
 
 .review-footer {
@@ -158,21 +122,6 @@ h2 {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #1f2937;
-}
-
-.open-review {
-  background: none;
-  border: none;
-  color: #60a5fa;
-  cursor: pointer;
-  padding: 0;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.open-review:hover {
-  color: #93c5fd;
-  text-decoration: underline;
 }
 
 /* FRIEND STATUS */
