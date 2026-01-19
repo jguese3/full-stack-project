@@ -1,4 +1,3 @@
-import "./friend_status.css"
 const users = [ {
     id: "0",
     username: "lsy",
@@ -47,5 +46,10 @@ export function FriendStatus() {
             </p>
         </li>
     );
-    return <ul>{listFriend}</ul>;
+    return (
+        <section className="friend-status">
+    <h2 className="section-title">Friend Status</h2>
+    <ul>{listFriend}</ul>
+</section>
+)
 }

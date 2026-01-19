@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./GameReview.css";
 
 type Review = {
   id: number;
@@ -13,7 +12,7 @@ type Review = {
 
 const GameReview: React.FC = () => {
   const [likes, setLikes] = useState<Record<number, number>>({});
-  const [liked, setLiked] = useState<Record<number, boolean>>({}); // track liked state
+  const [liked, setLiked] = useState<Record<number, boolean>>({});
 
   const reviews: Review[] = [
     {
@@ -57,13 +56,13 @@ const GameReview: React.FC = () => {
 
     setLiked((prev) => ({
       ...prev,
-      [id]: !isLiked, // toggle liked state
+      [id]: !isLiked,
     }));
   };
 
   return (
     <section className="game-review">
-      <h2 className="section-title">Reviews</h2>
+      <h2>Reviews</h2>
 
       <ul className="review-list">
         {reviews.map((review) => (

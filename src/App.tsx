@@ -9,8 +9,6 @@ function App() {
     <>
       <Backlog/>
       <GameReview/>
-      <br></br>
-      <h1>Friend Status</h1>
       <FriendStatus/>
       <Footer />
     </>
