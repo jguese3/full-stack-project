@@ -62,7 +62,7 @@ const GameReview: React.FC = () => {
 
   return (
     <section className="game-review">
-      <h2 className="section-title">Reviews</h2>
+      <h2>Reviews</h2>
 
       <ul className="review-list">
         {reviews.map((review) => (

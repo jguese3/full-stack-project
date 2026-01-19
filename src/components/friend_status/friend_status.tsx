@@ -48,7 +48,7 @@ export function FriendStatus() {
     );
     return (
         <section className="friend-status">
-    <h2 className="section-title">Reviews</h2>
+    <h2 className="section-title">Friend Status</h2>
     <ul>{listFriend}</ul>
 </section>
 )
