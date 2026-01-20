@@ -36,5 +36,5 @@ As a user, I want to be able to view my friends wishlist so that I can get gift 
 - Styleguide
 
 ### Lars Sy
-- Backlog List
+- Backlog List component
 - T3 project readme
