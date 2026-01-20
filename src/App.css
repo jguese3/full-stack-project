@@ -2,6 +2,9 @@
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 h1 {
@@ -115,11 +118,18 @@ h2 {
 
 .review-footer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   font-size: 0.9rem;
   color: #9ca3af;
   margin-top: 1rem;
   padding-top: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-bottom: 0;
   border-top: 1px solid #1f2937;
 }
 
@@ -183,21 +193,42 @@ h2 {
 /* FOOTER */
 footer {
   margin-top: auto;
-  padding: 2rem 0 1rem;
+  padding: 1.5rem;
   text-align: center;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
   width: 100%;
   color: #94a3b8;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 /* HEADER */
 header {
   margin-top: auto;
   text-align: center;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
   width: 100%;
   color: #94a3b8;
   padding-bottom: 5px;
   margin-bottom: 50px;
+}
+
+/* NAV */
+.page-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.page-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.page-links a:hover {
+  color: #f1f5f9;
+}
+
+.page-links a.active {
+  color: #8b5cf6;
+  font-weight: 600;
 }
