@@ -20,3 +20,21 @@ As a user, I want to be able to keep track of the latest releases or upcoming ga
 As a user, I want to view user reviews and ratings for games to determine if I should try it out or buy it.
 
 As a user, I want to be able to view my friends wishlist so that I can get gift ideas for them.
+
+## Sprint 1
+
+### Jarone Guese
+- Friends Status component
+- Footer component
+- Header component
+- Project Setup (repository, vercel)
+- Vercel Setup
+
+### Christian Martin
+- Game Review component
+- CSS
+- Styleguide
+
+### Lars Sy
+- Backlog List component
+- T3 project readme
