@@ -4,7 +4,7 @@ import { Footer } from './components/footer/footer'
 
 import { FriendStatus } from './components/friend_status/friend_status'
 import GameReview from './components/GameReview/GameReview'
-import { Backlog } from './components/backlog/backlog'
+import { Backlog } from './components/userList/userGameList'
 
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
