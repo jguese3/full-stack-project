@@ -70,3 +70,37 @@ function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: userGam
         </section>
     );
 }
+
+function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: userGameItem[], onMoveToBacklog: (game: userGameItem) => void, onMoveToCompleted: (game: userGameItem) => void }) {
+    return (
+        <section className="playing">
+            <h2>Playing</h2>
+            <ul>
+                {games.map((game) => (
+                    <li key={game.id}> 
+                    {game.title}
+                    <button onClick={() => onMoveToBacklog(game)}>Move to Backlog</button>
+                    <button onClick={() => onMoveToCompleted(game)}>Mark as Completed</button>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    );
+}
+
+function Completed({ games, onMoveToBacklog, onMoveToPlaying }: { games: userGameItem[], onMoveToBacklog: (game: userGameItem) => void, onMoveToPlaying: (game: userGameItem) => void }) {
+    return (
+        <section className="completed">
+            <h2>Completed</h2>
+            <ul>
+                {games.map((game) => (
+                    <li key={game.id}>
+                    {game.title}
+                    <button onClick={() => onMoveToBacklog(game)}>Move to Backlog</button>
+                    <button onClick={() => onMoveToPlaying(game)}>Move to Playing</button>
+                    </li>
+                ))}
+            </ul>
+        </section>
+    );
+}

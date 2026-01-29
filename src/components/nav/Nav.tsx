@@ -8,8 +8,8 @@ export function Nav() {
                 <NavLink to="/" end>
                     Home
                 </NavLink>
-                <NavLink to="/backlog">
-                    Backlog
+                <NavLink to="/UserGames">
+                    User Games
                 </NavLink>
                 <NavLink to="/reviews">
                     Reviews
