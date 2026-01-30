@@ -31,7 +31,7 @@ function getImageUrl(user: any) {
 const statusMessage = (status: any) =>
     status === "added" ? "to" : "from";
 
-export function FriendStatus() {
+export function Friends() {
     const listFriend = users.map(user =>
         <li key={user.id}>
             <img
