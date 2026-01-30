@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { UserCard } from "../user-card/UserCard";
 import type { User } from "../../assets/types/user";
 import "./user-list-display.css";
 
@@ -30,14 +31,14 @@ export function UserListDisplay({
             <UserCard
                 user={user}
                 isExpanded={user.id === expandedId}
-                onTitleClick={
+                onUsernameClick={
                     () => {
                         user.id !== expandedId ?
                         setExpandedId(user.id) :
                         setExpandedId(null);
                     }
                 }
-                onSaveClick={() => {
+                onFollowClick={() => {
                     handleUserFollowingClick(user);
                 }}
 
