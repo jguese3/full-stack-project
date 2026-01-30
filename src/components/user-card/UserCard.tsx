@@ -1,4 +1,4 @@
-import { User } from "../../assets/types/user";
+import type { User } from "../../assets/types/user";
 import "./user-card.css";
 
 export function UserCard(
