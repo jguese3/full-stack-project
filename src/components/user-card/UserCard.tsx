@@ -24,7 +24,7 @@ export function UserCard(
             </h3>
             {}
             <button onClick={onFollowClick}>
-                {user.isFollowing ? "Following" : "Unfollow"}
+                {user.isFollowing ? "Unfollow" : "Follow"}
             </button>
             </div>
             {}

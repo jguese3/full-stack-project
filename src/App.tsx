@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Header } from './components/layout/header/header';
 import { Footer } from './components/layout/footer/footer';
 
-
+// Components imports
 import { Friends } from './components/friends/Friends';
 import GameReview from './components/GameReview/GameReview';
 import { AllGames } from './components/all_games/allGames';
 import { UserGames } from './components/userList/userGameList';
-import Following from './components/friends/Following';
+import SearchFriends from './components/friends/SearchFriends';
+import { Following } from './components/friends/Following';
 
 // Mock data imports
 import type { User } from './assets/types/user';
@@ -33,7 +34,8 @@ function App() {
         <Route path="/reviews" element={<GameReview />} />
         <Route path="/friends" element={
           <>
-          <Following users={users} updateFollowing={setUsers} />
+          <SearchFriends users={users} updateFollowing={setUsers} />
+          < Following users={users} updateFollowing={setUsers} />
           <Friends />
           </>
         } 
