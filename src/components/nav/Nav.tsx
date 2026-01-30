@@ -8,6 +8,9 @@ export function Nav() {
                 <NavLink to="/" end>
                     Home
                 </NavLink>
+                <NavLink to="/all-games">
+                    All Games
+                </NavLink>
                 <NavLink to="/UserGames">
                     User Games
                 </NavLink>
