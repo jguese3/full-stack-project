@@ -11,8 +11,8 @@ export function Nav() {
                 <NavLink to="/all-games">
                     All Games
                 </NavLink>
-                <NavLink to="/backlog">
-                    Backlog
+                <NavLink to="/UserGames">
+                    User Games
                 </NavLink>
                 <NavLink to="/reviews">
                     Reviews
