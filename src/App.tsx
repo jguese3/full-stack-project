@@ -1,8 +1,8 @@
-import { Header } from './components/header/header'
-import { Footer } from './components/footer/footer'
+import { Header } from './components/layout/header/header'
+import { Footer } from './components/layout/footer/footer'
 
 
-import { FriendStatus } from './components/friend_status/friend_status'
+import { Friends } from './components/friends/Friends'
 import GameReview from './components/GameReview/GameReview'
 import { AllGames } from './components/all_games/allGames'
 import { UserGames } from './components/userList/userGameList'
@@ -21,7 +21,7 @@ function App() {
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/UserGames" element={<UserGames />} />
         <Route path="/reviews" element={<GameReview />} />
-        <Route path="/friends" element={<FriendStatus />} />
+        <Route path="/friends" element={<Friends />} />
       </Routes>
       <Footer />
     </>
