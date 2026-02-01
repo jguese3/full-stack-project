@@ -6,7 +6,7 @@ import { Footer } from './components/layout/footer/footer';
 // Components imports
 import { Friends } from './components/friends/Friends';
 import GameReview from './components/GameReview/GameReview';
-import { AllGames } from './components/all_games/allGames';
+import { AllGames } from './components/allGames/allGames';
 import { UserGames } from './components/userList/userGameList';
 import SearchFriends from './components/friends/SearchFriends';
 import { Following } from './components/friends/Following';
@@ -25,7 +25,7 @@ import './App.css';
 function App() {
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
-  
+
   const [userGameList, setUserGameList] = useState<UserGame[]>(tempUserGames);
 
   return (

@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import { GameSearch } from '../search/gameSearch';
+
 export interface userGameItem {
     id: number;
     title: string;
@@ -12,10 +15,13 @@ type UserGamesProps = {
 
 export function UserGames({ userGames, updateUserGames }: UserGamesProps) {
 
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredGames = userGames.filter(game => game.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
     // books in different shelves
-    const backlogGames = userGames.filter(game => game.status === 'backlog');
-    const playingGames = userGames.filter(game => game.status === 'playing');
-    const completedGames = userGames.filter(game => game.status === 'completed');
+    const backlogGames = filteredGames.filter(game => game.status === 'backlog');
+    const playingGames = filteredGames.filter(game => game.status === 'playing');
+    const completedGames = filteredGames.filter(game => game.status === 'completed');
 
     // i want to move a book from this shelf to this shelf, so i need the name of the book, where it is coming from and where it is going to
     const moveGame = (
@@ -29,6 +35,7 @@ export function UserGames({ userGames, updateUserGames }: UserGamesProps) {
     return (
         <section className="user-games">
             <h2>User Games</h2>
+            <GameSearch searchTerm={searchTerm} onSearchChange={setSearchTerm} />
             <div>
                 <Backlog
                     games={backlogGames}
