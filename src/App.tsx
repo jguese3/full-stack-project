@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Header } from './components/layout/header/header';
 import { Footer } from './components/layout/footer/footer';
 
+import { FriendStatus } from './components/friend_status/friend_status'
+import GameReview from './components/gamereview/GameReview'
+import { Backlog } from './components/backlog/backlog'
 // Components imports
 import { Friends } from './components/friends/Friends';
 import GameReview from './components/GameReview/GameReview';
