@@ -15,6 +15,9 @@ import { Following } from './components/friends/Following';
 import type { User } from './assets/types/user';
 import { userData } from './assets/temp/tempUsers';
 
+import type { UserGame } from './assets/temp/tempUserGames';
+import { tempUserGames } from './assets/temp/tempUserGames';
+
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -22,6 +25,9 @@ import './App.css';
 function App() {
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
+  
+  const [userGameList, setUserGameList] = useState<UserGame[]>(tempUserGames);
+
   return (
     <>
       <Header />
@@ -30,12 +36,12 @@ function App() {
           path="/"
         />
         <Route path="/all-games" element={<AllGames />} />
-        <Route path="/UserGames" element={<UserGames />} />
+        <Route path="/UserGames" element={<UserGames userGames={userGameList} updateUserGames={setUserGameList} />} />
         <Route path="/reviews" element={<GameReview />} />
         <Route path="/friends" element={
           <>
           <SearchFriends users={users} updateFollowing={setUsers} />
-          < Following users={users} updateFollowing={setUsers} />
+          <Following users={users} updateFollowing={setUsers} />
           <Friends />
           </>
         } 

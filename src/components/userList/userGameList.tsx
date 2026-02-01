@@ -1,33 +1,29 @@
-import { useState } from 'react';
-
-interface userGameItem {
+export interface userGameItem {
     id: number;
     title: string;
     platform: string;
     status: string;
 }
 
-const backlogList: userGameItem[] = [
-    { id: 1, title: "The Legend of Zelda: Breath of the Wild", platform: "Nintendo Switch", status: "backlog" },
-    { id: 2, title: "God of War", platform: "PlayStation 4", status: "backlog" },
-    { id: 3, title: "Red Dead Redemption 2", platform: "Xbox One", status: "backlog" },
-];
+type UserGamesProps = {
+    userGames: userGameItem[];
+    updateUserGames: React.Dispatch<React.SetStateAction<userGameItem[]>>;
+};
 
-export function UserGames() {
+export function UserGames({ userGames, updateUserGames }: UserGamesProps) {
 
     // books in different shelves
-    const [backlogGames, setBacklogGames] = useState<userGameItem[]>(backlogList);
-    const [playingGames, setPlayingGames] = useState<userGameItem[]>([]);
-    const [completedGames, setCompletedGames] = useState<userGameItem[]>([]);
+    const backlogGames = userGames.filter(game => game.status === 'backlog');
+    const playingGames = userGames.filter(game => game.status === 'playing');
+    const completedGames = userGames.filter(game => game.status === 'completed');
 
     // i want to move a book from this shelf to this shelf, so i need the name of the book, where it is coming from and where it is going to
     const moveGame = (
         game: userGameItem,
-        fromList: React.Dispatch<React.SetStateAction<userGameItem[]>>,
-        toList: React.Dispatch<React.SetStateAction<userGameItem[]>>
+        newStatus: string,
     ) => {
-        fromList((games) => games.filter((gameItem) => gameItem.id !== game.id));
-        toList((games) => [...games, game]);
+        updateUserGames(userGames.map(gameItem => gameItem.id === game.id ? { ...gameItem, status: newStatus } : gameItem)
+        );
     };
 
     return (
@@ -36,18 +32,18 @@ export function UserGames() {
             <div>
                 <Backlog
                     games={backlogGames}
-                    onMoveToPlaying={(game) => moveGame(game, setBacklogGames, setPlayingGames)}
-                    onMoveToCompleted={(game) => moveGame(game, setBacklogGames, setCompletedGames)}
+                    onMoveToPlaying={(game) => moveGame(game, 'playing')}
+                    onMoveToCompleted={(game) => moveGame(game, 'completed')}
                 />
                 <Playing
                     games={playingGames}
-                    onMoveToBacklog={(game) => moveGame(game, setPlayingGames, setBacklogGames)}
-                    onMoveToCompleted={(game) => moveGame(game, setPlayingGames, setCompletedGames)}
+                    onMoveToBacklog={(game) => moveGame(game, 'backlog')}
+                    onMoveToCompleted={(game) => moveGame(game, 'completed')}
                 />
                 <Completed
                     games={completedGames}
-                    onMoveToBacklog={(game) => moveGame(game, setCompletedGames, setBacklogGames)}
-                    onMoveToPlaying={(game) => moveGame(game, setCompletedGames, setPlayingGames)}
+                    onMoveToBacklog={(game) => moveGame(game, 'backlog')}
+                    onMoveToPlaying={(game) => moveGame(game, 'playing')}
                 />
             </div>
         </section>
