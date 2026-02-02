@@ -5,7 +5,7 @@ import { Footer } from './components/layout/footer/footer';
 
 // Components imports
 import { Friends } from './components/friends/Friends';
-import { GameReview } from './components/gamereview/GameReview';
+import { GameReview } from './components/GameReview/GameReview';
 import { AllGames } from './components/allGames/allGames';
 import { UserGames } from './components/userList/userGameList';
 import SearchFriends from './components/friends/SearchFriends';
