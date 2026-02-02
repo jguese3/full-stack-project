@@ -1,8 +1,13 @@
-import "./GameReview.css";
+import "./gamereview_module.css";
 import { reviews } from "../../data/reviewdata";
 import CommentSection from "../formcomments/commentsection";
 
-const GameReview = () => {
+interface GameReviewProps {
+  selectedReviewId: number;
+  setSelectedReviewId: (id: number) => void;
+}
+
+const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) => {
   return (
     <section className="game-review">
       <h2>Reviews</h2>
@@ -23,7 +28,14 @@ const GameReview = () => {
               <time className="date">{review.date}</time>
             </header>
             <p className="review-text">{review.review}</p>
-            <CommentSection reviewId={review.id} reviewGame={review.game} />
+            {selectedReviewId === review.id && (
+              <CommentSection reviewId={review.id} reviewGame={review.game} />
+            )}
+            {selectedReviewId !== review.id && (
+              <button onClick={() => setSelectedReviewId(review.id)} className="view-comments-btn">
+                View Comments
+              </button>
+            )}
           </li>
         ))}
       </ul>
