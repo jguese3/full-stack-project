@@ -3,7 +3,7 @@ import { Footer } from './components/footer/footer'
 import { useState } from 'react'
 
 import { FriendStatus } from './components/friend_status/friend_status'
-import GameReview from './components/gamereview/GameReview'
+import { GameReview }  from './components/gamereview/GameReview'
 import { Backlog } from './components/backlog/backlog'
 
 import { Routes, Route } from 'react-router-dom'

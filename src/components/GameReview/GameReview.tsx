@@ -7,7 +7,7 @@ interface GameReviewProps {
   setSelectedReviewId: (id: number) => void;
 }
 
-const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) => {
+export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) => {
   return (
     <section className="game-review">
       <h2>Reviews</h2>
@@ -42,5 +42,3 @@ const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) 
     </section>
   );
 };
-
-export default GameReview;
