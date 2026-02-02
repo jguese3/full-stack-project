@@ -5,7 +5,7 @@ import { Footer } from './components/layout/footer/footer';
 
 // Components imports
 import { Friends } from './components/friends/Friends';
-import GameReview from './components/GameReview/GameReview';
+import { GameReview } from './components/GameReview/GameReview';
 import { AllGames } from './components/allGames/allGames';
 import { UserGames } from './components/userList/userGameList';
 import SearchFriends from './components/friends/SearchFriends';
@@ -23,6 +23,7 @@ import './App.css';
 
 
 function App() {
+  const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
 
@@ -37,7 +38,7 @@ function App() {
         />
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/UserGames" element={<UserGames userGames={userGameList} updateUserGames={setUserGameList} />} />
-        <Route path="/reviews" element={<GameReview />} />
+        <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} />} />
         <Route path="/friends" element={
           <>
           <SearchFriends users={users} updateFollowing={setUsers} />
