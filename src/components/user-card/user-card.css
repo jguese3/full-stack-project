@@ -1,0 +1,9 @@
+.user-card {
+    max-width: 100%;
+}
+
+.user-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

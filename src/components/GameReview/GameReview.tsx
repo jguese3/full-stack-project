@@ -11,22 +11,25 @@ export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReview
   return (
     <section className="game-review">
       <h2>Reviews</h2>
+
       <ul className="review-list">
         {reviews.map((review) => (
           <li className="review-card" key={review.id}>
             <header className="review-header">
               <div className="user-info">
+                <p className="user-line">
                   <strong>{review.username}</strong>{" "}
-                  <span className="reviewed-text"> reviewed {review.game}</span>
+                  <span className="reviewed-text">
+                    reviewed {review.game}
+                  </span>
+                </p>
 
-                <div className="rating">
-                  {"★".repeat(review.rating)}
-                  <span className="rating-text">Rating: {review.rating}</span>
-                </div>
-
+                <div className="rating">{"★".repeat(review.rating)}</div>
               </div>
+
               <time className="date">{review.date}</time>
             </header>
+
             <p className="review-text">{review.review}</p>
             {selectedReviewId === review.id && (
               <CommentSection reviewId={review.id} reviewGame={review.game} />
