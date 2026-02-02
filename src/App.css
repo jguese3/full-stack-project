@@ -2,6 +2,9 @@
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 h1 {
@@ -23,8 +26,8 @@ h2 {
   text-align: center;
 }
 
-/* BACKLOG */
-.backlog {
+/* user game list */
+.backlog, .playing, .completed {
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   padding: 2.5rem;
   border-radius: 16px;
@@ -33,13 +36,13 @@ h2 {
   border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-.backlog h2 {
+.backlog h2, .playing h2, .completed h2 {
   color: #f1f5f9;
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
-.backlog ul {
+.backlog ul, .playing ul, .completed ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -47,7 +50,7 @@ h2 {
   gap: 1rem;
 }
 
-.backlog li {
+.backlog li, .playing li, .completed li {
   background: rgba(255, 255, 255, 0.05);
   padding: 1.25rem 1.5rem;
   border-radius: 10px;
@@ -58,7 +61,7 @@ h2 {
   text-align: left;
 }
 
-.backlog li:hover {
+.backlog li:hover, .playing li:hover, .completed li:hover {
   transform: translateX(8px);
   background: rgba(139, 92, 246, 0.15);
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
@@ -115,11 +118,18 @@ h2 {
 
 .review-footer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1.5rem;
   font-size: 0.9rem;
   color: #9ca3af;
   margin-top: 1rem;
   padding-top: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-bottom: 0;
   border-top: 1px solid #1f2937;
 }
 
@@ -183,21 +193,43 @@ h2 {
 /* FOOTER */
 footer {
   margin-top: auto;
-  padding: 2rem 0 1rem;
+  padding: 1.5rem;
   text-align: center;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
   width: 100%;
   color: #94a3b8;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 /* HEADER */
 header {
   margin-top: auto;
   text-align: center;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
   width: 100%;
   color: #94a3b8;
   padding-bottom: 5px;
   margin-bottom: 50px;
+}
+
+/* NAV */
+.page-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.page-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.page-links a:hover {
+  color: #8b5cf6;
+}
+
+.page-links a.active {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: #667eea;
 }
