@@ -14,9 +14,9 @@ function Following({
     const [searchValue, setSearchValue] = useState<string>("");
 
     return (
-        <>
+        <section className="friend-status">
         <header>
-            <h1>Search Friends</h1>
+            <h2>Search Friends</h2>
         </header>
         <main>
             <section>
@@ -39,7 +39,7 @@ function Following({
                 />
             </section>
         </main>
-        </>
+        </section>
     );
 }
 
