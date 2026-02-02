@@ -38,3 +38,24 @@ As a user, I want to be able to view my friends wishlist so that I can get gift 
 ### Lars Sy
 - Backlog List component
 - T3 project readme
+
+## Sprint 2
+
+### Jarone Guese
+- Search Friends
+- Follow/Unfollow Friends
+- Render Followed Users
+- All this using shared state
+- AxeDevtools fixed
+
+### Christian Martin
+- Add/Post Comment
+- Game Review search
+- Navigation & Routes
+- View other Comments
+
+### Lars Sy
+- All games list
+- User's list of games
+- refactored Backlog to User Games as im broadening the scope of this component.
+- Added Playing and Completed sections.
