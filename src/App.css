@@ -225,10 +225,11 @@ header {
 }
 
 .page-links a:hover {
-  color: #f1f5f9;
+  color: #8b5cf6;
 }
 
 .page-links a.active {
-  color: #8b5cf6;
+  color: #ffffff;
   font-weight: 600;
+  text-shadow: #667eea;
 }

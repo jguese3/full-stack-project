@@ -12,9 +12,9 @@ export function Following(
     }
 ) {
     return(
-        <>
+        <section className="friend-status">
         <header>
-            <h1>Following</h1>
+            <h2>Following</h2>
         </header>
         <main>
             <UserListDisplay
@@ -22,6 +22,6 @@ export function Following(
                 updateFollowing={updateFollowing}
                 />
         </main>
-        </>
+        </section>
     )
 }
