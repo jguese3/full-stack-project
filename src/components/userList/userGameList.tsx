@@ -1,36 +1,14 @@
-import React, { useState } from 'react';
 import { GameSearch } from '../search/gameSearch';
+import { useUserGames } from '../../hooks/useUserGames';
+import type { UserGame } from '../../assets/temp/tempUserGames';
 
-export interface userGameItem {
-    id: number;
-    title: string;
-    platform: string;
-    status: string;
-}
+export function UserGames() {
 
-type UserGamesProps = {
-    userGames: userGameItem[];
-    updateUserGames: React.Dispatch<React.SetStateAction<userGameItem[]>>;
-};
+    const { games, searchTerm, setSearchTerm, updateGameStatus } = useUserGames();
 
-export function UserGames({ userGames, updateUserGames }: UserGamesProps) {
-
-    const [searchTerm, setSearchTerm] = useState('');
-    const filteredGames = userGames.filter(game => game.title.toLowerCase().includes(searchTerm.toLowerCase()));
-
-    // books in different shelves
-    const backlogGames = filteredGames.filter(game => game.status === 'backlog');
-    const playingGames = filteredGames.filter(game => game.status === 'playing');
-    const completedGames = filteredGames.filter(game => game.status === 'completed');
-
-    // i want to move a book from this shelf to this shelf, so i need the name of the book, where it is coming from and where it is going to
-    const moveGame = (
-        game: userGameItem,
-        newStatus: string,
-    ) => {
-        updateUserGames(userGames.map(gameItem => gameItem.id === game.id ? { ...gameItem, status: newStatus } : gameItem)
-        );
-    };
+    const backlogGames = games.filter(game => game.status === 'backlog');
+    const playingGames = games.filter(game => game.status === 'playing');
+    const completedGames = games.filter(game => game.status === 'completed');
 
     return (
         <section className="user-games">
@@ -39,25 +17,25 @@ export function UserGames({ userGames, updateUserGames }: UserGamesProps) {
             <div>
                 <Backlog
                     games={backlogGames}
-                    onMoveToPlaying={(game) => moveGame(game, 'playing')}
-                    onMoveToCompleted={(game) => moveGame(game, 'completed')}
+                    onMoveToPlaying={(game) => updateGameStatus(game.id, 'playing')}
+                    onMoveToCompleted={(game) => updateGameStatus(game.id, 'completed')}
                 />
                 <Playing
                     games={playingGames}
-                    onMoveToBacklog={(game) => moveGame(game, 'backlog')}
-                    onMoveToCompleted={(game) => moveGame(game, 'completed')}
+                    onMoveToBacklog={(game) => updateGameStatus(game.id, 'backlog')}
+                    onMoveToCompleted={(game) => updateGameStatus(game.id, 'completed')}
                 />
                 <Completed
                     games={completedGames}
-                    onMoveToBacklog={(game) => moveGame(game, 'backlog')}
-                    onMoveToPlaying={(game) => moveGame(game, 'playing')}
+                    onMoveToBacklog={(game) => updateGameStatus(game.id, 'backlog')}
+                    onMoveToPlaying={(game) => updateGameStatus(game.id, 'playing')}
                 />
             </div>
         </section>
     );
 }
 
-function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: userGameItem[], onMoveToPlaying: (game: userGameItem) => void, onMoveToCompleted: (game: userGameItem) => void }) {
+function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: UserGame[], onMoveToPlaying: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void }) {
     return (
         <section className="backlog">
             <h2>Backlog</h2>
@@ -74,7 +52,7 @@ function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: userGam
     );
 }
 
-function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: userGameItem[], onMoveToBacklog: (game: userGameItem) => void, onMoveToCompleted: (game: userGameItem) => void }) {
+function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void }) {
     return (
         <section className="playing">
             <h2>Playing</h2>
@@ -91,7 +69,7 @@ function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: userGam
     );
 }
 
-function Completed({ games, onMoveToBacklog, onMoveToPlaying }: { games: userGameItem[], onMoveToBacklog: (game: userGameItem) => void, onMoveToPlaying: (game: userGameItem) => void }) {
+function Completed({ games, onMoveToBacklog, onMoveToPlaying }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToPlaying: (game: UserGame) => void }) {
     return (
         <section className="completed">
             <h2>Completed</h2>
