@@ -3,16 +3,27 @@ import "./gamereview_module.css";
 import { fetchAllReviews } from "../../apis/reviewRepository";
 import CommentSection from "../formcomments/commentsection";
 import { GameSearch } from "../search/gameSearch";
+import { tempGames } from "../../assets/temp/tempGames";
 
 
 interface GameReviewProps {
   selectedReviewId: number;
   setSelectedReviewId: (id: number) => void;
+  gameId?: number;
 }
 
-export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) => {
+export const GameReview = ({ selectedReviewId, setSelectedReviewId, gameId }: GameReviewProps) => {
   const [searchTerm, setSearchTerm] = React.useState("");
-  const reviewList = fetchAllReviews();
+  const allReviews = fetchAllReviews();
+  
+  const reviewList = gameId 
+    ? allReviews.filter(review => review.gameId === gameId)
+    : allReviews;
+
+  const getGameTitle = (id: number): string => {
+    const game = tempGames.find(g => g.id === id);
+    return game ? game.title : "Unknown Game";
+  };
 
   return (
     <section className="game-review">
@@ -26,7 +37,7 @@ export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReview
                 <p className="user-line">
                   <strong>{review.username}</strong>{" "}
                   <span className="reviewed-text">
-                    reviewed {review.game}
+                    reviewed {getGameTitle(review.gameId)}
                   </span>
                 </p>
 
@@ -38,7 +49,7 @@ export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReview
 
             <p className="review-text">{review.review}</p>
             {selectedReviewId === review.id && (
-              <CommentSection reviewId={review.id} reviewGame={review.game} />
+              <CommentSection reviewId={review.id} reviewGame={getGameTitle(review.gameId)} />
             )}
             {selectedReviewId !== review.id && (
               <button onClick={() => setSelectedReviewId(review.id)} className="view-comments-btn">

@@ -4,7 +4,7 @@ export const reviews: Review[] = [
   {
     id: 1,
     username: "Christian",
-    game: "Valorant",
+    gameId: 12,
     rating: 5,
     date: "Jan 16, 2026",
     review: "best fps game ever made",
@@ -13,7 +13,7 @@ export const reviews: Review[] = [
   {
     id: 2,
     username: "Lars",
-    game: "Minecraft",
+    gameId: 5,
     rating: 4,
     date: "Jan 16, 2026",
     review: "played this game every day for a year straight",
@@ -22,7 +22,7 @@ export const reviews: Review[] = [
   {
     id: 3,
     username: "Jarone",
-    game: "God of War: Ragnarok",
+    gameId: 2,
     rating: 3.5,
     date: "Jan 16, 2026",
     review: "played this game 67 times and died 67 times",
@@ -31,7 +31,7 @@ export const reviews: Review[] = [
   {
     id: 4,
     username: "Emily",
-    game: "The Legend of Zelda: Breath of the Wild",
+    gameId: 1,
     rating: 5,
     date: "Jan 20, 2026",
     review: "Masterpiece of open-world design. Every corner of Hyrule is worth exploring.",
@@ -40,7 +40,7 @@ export const reviews: Review[] = [
   {
     id: 5,
     username: "Marcus",
-    game: "Elden Ring",
+    gameId: 4,
     rating: 4.5,
     date: "Jan 22, 2026",
     review: "Challenging but fair. The Lands Between are hauntingly beautiful.",
@@ -49,7 +49,7 @@ export const reviews: Review[] = [
   {
     id: 6,
     username: "Sarah",
-    game: "Baldur's Gate 3",
+    gameId: 5,
     rating: 5,
     date: "Jan 25, 2026",
     review: "Best RPG I've played in years. So many choices and consequences!",
@@ -58,7 +58,7 @@ export const reviews: Review[] = [
   {
     id: 7,
     username: "Alex",
-    game: "Spider-Man 2",
+    gameId: 6,
     rating: 4,
     date: "Feb 1, 2026",
     review: "Swinging through New York never gets old. Great story too.",
@@ -67,7 +67,7 @@ export const reviews: Review[] = [
   {
     id: 8,
     username: "Jordan",
-    game: "Resident Evil 4 (Remake)",
+    gameId: 9,
     rating: 4.5,
     date: "Feb 5, 2026",
     review: "The perfect remake. Keeps the original's charm with modern polish.",
@@ -76,7 +76,7 @@ export const reviews: Review[] = [
   {
     id: 9,
     username: "Taylor",
-    game: "Cyberpunk 2077",
+    gameId: 12,
     rating: 3,
     date: "Feb 10, 2026",
     review: "Finally playable after all the patches. Night City is stunning.",
@@ -85,7 +85,7 @@ export const reviews: Review[] = [
   {
     id: 10,
     username: "Morgan",
-    game: "Sekiro: Shadows Die Twice",
+    gameId: 18,
     rating: 5,
     date: "Feb 15, 2026",
     review: "Brutal difficulty but the combat system is pure perfection.",
