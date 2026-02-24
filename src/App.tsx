@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Header } from './components/layout/header/header';
 import { Footer } from './components/layout/footer/footer';
@@ -24,6 +25,16 @@ import './App.css';
 
 function App() {
   const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
+  const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
+  
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (location.state?.selectedGameId) {
+      setSelectedGameId(location.state.selectedGameId);
+    }
+  }, [location.state?.selectedGameId]);
+
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
   
