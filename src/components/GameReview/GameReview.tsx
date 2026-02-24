@@ -1,6 +1,6 @@
 import React from "react";
 import "./gamereview_module.css";
-import { reviews } from "../../data/reviewdata";
+import { fetchAllReviews } from "../../apis/reviewRepository";
 import CommentSection from "../formcomments/commentsection";
 import { GameSearch } from "../search/gameSearch";
 
@@ -12,13 +12,14 @@ interface GameReviewProps {
 
 export const GameReview = ({ selectedReviewId, setSelectedReviewId }: GameReviewProps) => {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const reviewList = fetchAllReviews();
 
   return (
     <section className="game-review">
       <h2>Reviews</h2>
       <GameSearch searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <ul className="review-list">
-        {reviews.map((review) => (
+        {reviewList.map((review) => (
           <li className="review-card" key={review.id}>
             <header className="review-header">
               <div className="user-info">

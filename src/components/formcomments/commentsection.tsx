@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import "./commentsection_module.css";
-import { comments } from "../../data/commentsdata";
 import type { Comment } from "../../types/comment";
-
-const addComment = (newComment: Omit<Comment, "id">) => {
-  const nextId = comments.length > 0 ? Math.max(...comments.map(c => c.id)) + 1 : 1;
-  const comment: Comment = {
-    ...newComment,
-    id: nextId,
-  };
-  comments.push(comment);
-  return comment;
-};
+import { addComment, fetchAllComments, fetchCommentsByReviewId } from "../../apis/commentRepository";
 
 interface CommentSectionProps {
   reviewId: number;
@@ -19,7 +9,7 @@ interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({ reviewId, reviewGame }) => {
-  const [commentList, setCommentList] = useState<Comment[]>(comments.filter(c => c.reviewId === reviewId));
+  const [commentList, setCommentList] = useState<Comment[]>(fetchCommentsByReviewId(reviewId));
   const [username, setUsername] = useState("");
   const [commentText, setCommentText] = useState("");
 
@@ -31,7 +21,11 @@ const CommentSection: React.FC<CommentSectionProps> = ({ reviewId, reviewGame })
       return;
     }
 
-    const newComment = addComment({
+    const existingComments = fetchAllComments();
+    const nextId = existingComments.length > 0 ? Math.max(...existingComments.map(c => c.id)) + 1 : 1;
+
+    const newComment: Comment = addComment({
+      id: nextId,
       reviewId,
       username,
       text: commentText,
