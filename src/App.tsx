@@ -37,9 +37,7 @@ function App() {
 
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
-
-  const [userGameList, setUserGameList] = useState<UserGame[]>(tempUserGames);
-
+  
   return (
     <>
       <Header />
@@ -48,8 +46,8 @@ function App() {
           path="/"
         />
         <Route path="/all-games" element={<AllGames />} />
-        <Route path="/UserGames" element={<UserGames userGames={userGameList} updateUserGames={setUserGameList} />} />
-        <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} gameId={selectedGameId || undefined} onResetFilter={() => setSelectedGameId(null)} />} />
+        <Route path="/UserGames" element={<UserGames />} />
+        <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} />} />
         <Route path="/friends" element={
           <>
           <SearchFriends users={users} updateFollowing={setUsers} />
