@@ -48,7 +48,7 @@ function App() {
           path="/"
         />
         <Route path="/all-games" element={<AllGames />} />
-        <Route path="/UserGames" element={<UserGames userGames={userGameList} updateUserGames={setUserGameList} />} />
+        <Route path="/UserGames" element={<UserGames /> } />
         <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} gameId={selectedGameId || undefined} onResetFilter={() => setSelectedGameId(null)} />} />
         <Route path="/friends" element={
           <>
