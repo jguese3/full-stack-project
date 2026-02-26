@@ -16,17 +16,16 @@ import { Following } from './components/friends/Following';
 import type { User } from './assets/types/user';
 import { userData } from './assets/temp/tempUsers';
 
-import type { UserGame } from './assets/temp/tempUserGames';
-import { tempUserGames } from './assets/temp/tempUserGames';
-
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-
 
 function App() {
   const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
   const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
   
+  // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
+  console.log(selectedGameId);
+
   const location = useLocation();
   
   useEffect(() => {
