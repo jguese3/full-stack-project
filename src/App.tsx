@@ -23,19 +23,16 @@ function App() {
   const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
   const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
 
-  // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
-  console.log(selectedGameId)
-  
-  // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
-  console.log(selectedGameId);
-
   const location = useLocation();
   
   useEffect(() => {
-    if (location.state?.selectedGameId) {
-      setSelectedGameId(location.state.selectedGameId);
+    if (location.pathname !== "/reviews") {
+      return;
     }
-  }, [location.state?.selectedGameId]);
+
+    const nextGameId = location.state?.selectedGameId ?? null;
+    setSelectedGameId(nextGameId);
+  }, [location.pathname, location.state?.selectedGameId]);
 
   // Shared state concerning user data
   const [users, setUsers] = useState<User[]>(userData);
@@ -49,7 +46,17 @@ function App() {
         />
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/UserGames" element={<UserGames />} />
-        <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} />} />
+        <Route
+          path="/reviews"
+          element={
+            <GameReview
+              selectedReviewId={selectedReviewId}
+              setSelectedReviewId={setSelectedReviewId}
+              gameId={selectedGameId ?? undefined}
+              onResetFilter={() => setSelectedGameId(null)}
+            />
+          }
+        />
         <Route path="/friends" element={
           <>
           <SearchFriends users={users} updateFollowing={setUsers} />

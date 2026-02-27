@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { addComment, fetchAllComments, fetchCommentsByReviewId } from "../../apis/commentRepository";
-import { addReview } from "../../apis/reviewRepository";
-import type { Comment } from "../../types/comment";
-import type { Review } from "../../types/reviewtype";
+import React from "react";
+import { useReviewAndCommentForm } from "../../hooks/useReviewAndCommentForm";
 import "./commentsection_module.css";
 
 interface ReviewFormProps {
@@ -21,67 +18,19 @@ interface CommentFormProps {
 type ReviewAndCommentFormProps = ReviewFormProps | CommentFormProps;
 
 export const ReviewAndCommentForm: React.FC<ReviewAndCommentFormProps> = (props) => {
-  const [commentList, setCommentList] = useState<Comment[]>(
-    props.type === "comment" ? fetchCommentsByReviewId(props.reviewId) : []
-  );
-  const [username, setUsername] = useState("");
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState(5);
+  const {
+    commentList,
+    username,
+    setUsername,
+    text,
+    setText,
+    rating,
+    setRating,
+    submitForm,
+  } = useReviewAndCommentForm(props);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!username.trim() || !text.trim()) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    const currentDate = new Date().toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-
-    if (props.type === "comment") {
-      // Handle comment submission
-      const existingComments = fetchAllComments();
-      const nextId = existingComments.length > 0 ? Math.max(...existingComments.map(c => c.id)) + 1 : 1;
-
-      const newComment: Comment = {
-        id: nextId,
-        reviewId: props.reviewId,
-        username,
-        text,
-        date: currentDate,
-      };
-
-      addComment(newComment);
-      setCommentList([...commentList, newComment]);
-    } else {
-      // Handle review submission
-      const nextId = Date.now();
-
-      const newReview: Review = {
-        id: nextId,
-        username,
-        gameId: props.gameId,
-        rating,
-        date: currentDate,
-        review: text,
-        likes: 0,
-      };
-
-      addReview(newReview);
-      props.onSubmitSuccess();
-    }
-
-    setUsername("");
-    setText("");
-    setRating(5);
-  };
-
-  const title = props.type === "comment" 
-    ? `Comments for ${props.reviewGame}` 
+  const title = props.type === "comment"
+    ? `Comments for ${props.reviewGame}`
     : `Leave a Review for ${props.gameTitle}`;
 
   const textLabel = props.type === "comment" ? "Leave a Comment:" : "Your Review:";
@@ -112,7 +61,13 @@ export const ReviewAndCommentForm: React.FC<ReviewAndCommentFormProps> = (props)
 
       <h3>{title}</h3>
 
-      <form onSubmit={handleSubmit} className="comment-form">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitForm();
+        }}
+        className="comment-form"
+      >
         <div className="form-group">
           <label htmlFor={`${props.type}-username`}>Username:</label>
           <input
