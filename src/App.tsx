@@ -22,6 +22,9 @@ import './App.css';
 function App() {
   const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
   const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
+
+  // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
+  console.log(selectedGameId)
   
   // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
   console.log(selectedGameId);
