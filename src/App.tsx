@@ -26,9 +26,6 @@ function App() {
   // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
   console.log(selectedGameId)
   
-  // just remove this CJM when you get here, its just so the yellow squiggly lines go away for now
-  console.log(selectedGameId);
-
   const location = useLocation();
   
   useEffect(() => {
