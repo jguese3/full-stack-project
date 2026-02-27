@@ -16,10 +16,24 @@ export function updateGameStatus(gameId: number, newStatus: string): UserGame {
 }
 
 export function addGame(newGame: UserGame): UserGame {
+    const currentLibrary = gameRepository.fetchAllUserGames();
+
+    for (const game of currentLibrary) {
+        if (game.id === newGame.id) {
+            throw new Error("Game is already in your library");
+        }
+    }
+
     if (!isValidStatus(newGame.status)) {
         throw new Error("Invalid game status");
     }
-    return gameRepository.addUserGame(newGame);
+
+    const gameAdded: UserGame = {
+        ...newGame,
+        status: "backlog"
+    };
+    
+    return gameRepository.addUserGame(gameAdded);
 }
 
 export function removeGame(gameId: number): UserGame {
