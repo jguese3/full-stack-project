@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import type { UserGame } from "../assets/temp/tempUserGames";
+import type { Game } from "../assets/temp/tempGames";
 import * as userGamesService from "../services/userGamesService";
 
 export function useUserGames() {
-    const [userGames, setUserGames] = useState<UserGame[]>([]);
+    const [userGames, setUserGames] = useState<Game[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
-        const games: UserGame[] = userGamesService.getAllUserGames();
+        const games: Game[] = userGamesService.getAllUserGames();
         setUserGames(games);
     }, []);
 
-    function filterGamesBySearch(games: UserGame[], term: string): UserGame[] {
+    function filterGamesBySearch(games: Game[], term: string): Game[] {
         return games.filter(game =>
             game.title.toLowerCase().includes(term.toLowerCase())
         );
@@ -31,7 +31,7 @@ export function useUserGames() {
         }
     }
 
-    function addGameToLibrary(newGame: UserGame) {
+    function addGameToLibrary(newGame: Game) {
         try {
             const addedGame = userGamesService.addGame(newGame);
             setUserGames(prevGames => [...prevGames, addedGame]);
