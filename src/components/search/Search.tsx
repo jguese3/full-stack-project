@@ -2,26 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../../hooks/useSearch";
-
-
-// export function Search({searchValue, handleSearchChange}
-//     : {
-//         searchValue: string, 
-//         handleSearchChange: (newValue: string) => void
-//     }) {
-//     return(
-//         <form className="search-form" action="#">
-//             {/* Note use of closing tags on inputs */}
-//             <input type="text" 
-//                 name="field-term" 
-//                 placeholder="Enter username or id..." 
-//                 value={searchValue}
-//                 onChange={e => handleSearchChange(e.target.value)}
-//             />
-//             <input type="submit" value="Search" />
-//         </form>
-//     );
-// }
+import { SearchBar } from "../common/search-bar/SearchBar";
 
 export function Search() {
     const {
@@ -51,15 +32,13 @@ export function Search() {
     }, [location]);
 
     return(
-        <form className="search-form" action="#">
-            {/* Note use of closing tags on inputs */}
-            <input type="text" 
-                name="field-term" 
-                placeholder="Enter username or id..." 
-                value={searchValue}
-                onChange={e => handleSearchChange(e.target.value)}
+        <div>
+            <SearchBar
+                searchValue={searchValue}
+                messages={searchMessages}
+                handleSearchChange={setSearchValue}
+                handleSubmit={doSearch}
             />
-            <input type="submit" value="Search" />
-        </form>
+        </div>
     );
 }

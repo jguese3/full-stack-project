@@ -20,7 +20,6 @@ function Following({
         </header>
         <main>
             <section>
-                {}
                 <Search
                     searchValue={searchValue}
                     handleSearchChange={setSearchValue}
