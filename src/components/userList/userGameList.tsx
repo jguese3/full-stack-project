@@ -1,6 +1,6 @@
 import { GameSearch } from '../search/gameSearch';
 import { useUserGames } from '../../hooks/useUserGames';
-import type { UserGame } from '../../assets/temp/tempUserGames';
+import type { Game } from '../../assets/temp/tempGames';
 
 export function UserGames() {
 
@@ -38,7 +38,7 @@ export function UserGames() {
     );
 }
 
-function Backlog({ games, onMoveToPlaying, onMoveToCompleted, removeGameFromLibrary }: { games: UserGame[], onMoveToPlaying: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void, removeGameFromLibrary: (gameId: number) => void }) {
+function Backlog({ games, onMoveToPlaying, onMoveToCompleted, removeGameFromLibrary }: { games: Game[], onMoveToPlaying: (game: Game) => void, onMoveToCompleted: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="backlog">
             <h2>Backlog</h2>
@@ -56,7 +56,7 @@ function Backlog({ games, onMoveToPlaying, onMoveToCompleted, removeGameFromLibr
     );
 }
 
-function Playing({ games, onMoveToBacklog, onMoveToCompleted, removeGameFromLibrary }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void, removeGameFromLibrary: (gameId: number) => void }) {
+function Playing({ games, onMoveToBacklog, onMoveToCompleted, removeGameFromLibrary }: { games: Game[], onMoveToBacklog: (game: Game) => void, onMoveToCompleted: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="playing">
             <h2>Playing</h2>
@@ -74,7 +74,7 @@ function Playing({ games, onMoveToBacklog, onMoveToCompleted, removeGameFromLibr
     );
 }
 
-function Completed({ games, onMoveToBacklog, onMoveToPlaying, removeGameFromLibrary }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToPlaying: (game: UserGame) => void, removeGameFromLibrary: (gameId: number) => void }) {
+function Completed({ games, onMoveToBacklog, onMoveToPlaying, removeGameFromLibrary }: { games: Game[], onMoveToBacklog: (game: Game) => void, onMoveToPlaying: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="completed">
             <h2>Completed</h2>
