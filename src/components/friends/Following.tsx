@@ -1,4 +1,4 @@
-import type { User } from "../../assets/types/user";
+import type { User } from "../../types/user";
 import { UserListDisplay } from "../user-list-display/UserListDisplay";
 
 export function Following(

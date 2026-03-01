@@ -13,7 +13,7 @@ import SearchFriends from './components/friends/SearchFriends';
 import { Following } from './components/friends/Following';
 
 // Mock data imports
-import type { User } from './assets/types/user';
+import type { User } from './types/user';
 import { userData } from './assets/temp/tempUsers';
 
 import { Routes, Route } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { User } from "../../assets/types/user";
+import type { User } from "../../types/user";
 import { Search } from "../search/Search";
 import { UserListDisplay } from "../user-list-display/UserListDisplay";
 

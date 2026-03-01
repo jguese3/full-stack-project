@@ -1,4 +1,4 @@
-import type { User } from "../types/user";
+import type { User } from "../../types/user";
 
 export const userData: User[] = [
     { id: 0, userName: "pixelKnight", bio: "Fighting bugs one pixel at a time.", isFollowing: false },

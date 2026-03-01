@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserCard } from "../user-card/UserCard";
-import type { User } from "../../assets/types/user";
+import type { User } from "../../types/user";
 import "./user-list-display.css";
 
 export function UserListDisplay({
