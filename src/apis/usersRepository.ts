@@ -27,8 +27,7 @@ export async function followUser(userId: number) {
         foundUser.isFollowing = true;
     }
 
-    return foundUser;
-    
+    return userData.find(u => u.id === userId)!;
 }
 
 // Delete following
@@ -40,6 +39,7 @@ export async function unfollowUser(userId: number) {
     } else {
         foundUser.isFollowing = false;
     }
+
     console.log("User unfollowed:", foundUser);
-    return foundUser;
+    return userData.find(u => u.id === userId)!;
 }
