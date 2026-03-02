@@ -1,10 +1,10 @@
 import { GameSearch } from '../search/gameSearch';
 import { useUserGames } from '../../hooks/useUserGames';
-import type { UserGame } from '../../assets/temp/tempUserGames';
+import type { Game } from '../../assets/temp/tempGames';
 
 export function UserGames() {
 
-    const { games, searchTerm, setSearchTerm, updateGameStatus } = useUserGames();
+    const { games, searchTerm, setSearchTerm, updateGameStatus, removeGameFromLibrary } = useUserGames();
 
     const backlogGames = games.filter(game => game.status === 'backlog');
     const playingGames = games.filter(game => game.status === 'playing');
@@ -19,23 +19,26 @@ export function UserGames() {
                     games={backlogGames}
                     onMoveToPlaying={(game) => updateGameStatus(game.id, 'playing')}
                     onMoveToCompleted={(game) => updateGameStatus(game.id, 'completed')}
+                    removeGameFromLibrary={removeGameFromLibrary}
                 />
                 <Playing
                     games={playingGames}
                     onMoveToBacklog={(game) => updateGameStatus(game.id, 'backlog')}
                     onMoveToCompleted={(game) => updateGameStatus(game.id, 'completed')}
+                    removeGameFromLibrary={removeGameFromLibrary}
                 />
                 <Completed
                     games={completedGames}
                     onMoveToBacklog={(game) => updateGameStatus(game.id, 'backlog')}
                     onMoveToPlaying={(game) => updateGameStatus(game.id, 'playing')}
+                    removeGameFromLibrary={removeGameFromLibrary}
                 />
             </div>
         </section>
     );
 }
 
-function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: UserGame[], onMoveToPlaying: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void }) {
+function Backlog({ games, onMoveToPlaying, onMoveToCompleted, removeGameFromLibrary }: { games: Game[], onMoveToPlaying: (game: Game) => void, onMoveToCompleted: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="backlog">
             <h2>Backlog</h2>
@@ -45,6 +48,7 @@ function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: UserGam
                     {game.title}
                     <button onClick={() => onMoveToPlaying(game)}>Start Playing!</button>
                     <button onClick={() => onMoveToCompleted(game)}>Mark as Completed</button>
+                    <button onClick={() => removeGameFromLibrary(game.id)}>Remove from Library</button>
                     </li>
                 ))}
             </ul>
@@ -52,7 +56,7 @@ function Backlog({ games, onMoveToPlaying, onMoveToCompleted }: { games: UserGam
     );
 }
 
-function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToCompleted: (game: UserGame) => void }) {
+function Playing({ games, onMoveToBacklog, onMoveToCompleted, removeGameFromLibrary }: { games: Game[], onMoveToBacklog: (game: Game) => void, onMoveToCompleted: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="playing">
             <h2>Playing</h2>
@@ -62,6 +66,7 @@ function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: UserGam
                     {game.title}
                     <button onClick={() => onMoveToBacklog(game)}>Move to Backlog</button>
                     <button onClick={() => onMoveToCompleted(game)}>Mark as Completed</button>
+                    <button onClick={() => removeGameFromLibrary(game.id)}>Remove from Library</button>
                     </li>
                 ))}
             </ul>
@@ -69,7 +74,7 @@ function Playing({ games, onMoveToBacklog, onMoveToCompleted }: { games: UserGam
     );
 }
 
-function Completed({ games, onMoveToBacklog, onMoveToPlaying }: { games: UserGame[], onMoveToBacklog: (game: UserGame) => void, onMoveToPlaying: (game: UserGame) => void }) {
+function Completed({ games, onMoveToBacklog, onMoveToPlaying, removeGameFromLibrary }: { games: Game[], onMoveToBacklog: (game: Game) => void, onMoveToPlaying: (game: Game) => void, removeGameFromLibrary: (gameId: number) => void }) {
     return (
         <section className="completed">
             <h2>Completed</h2>
@@ -79,6 +84,7 @@ function Completed({ games, onMoveToBacklog, onMoveToPlaying }: { games: UserGam
                     {game.title}
                     <button onClick={() => onMoveToBacklog(game)}>Move to Backlog</button>
                     <button onClick={() => onMoveToPlaying(game)}>Move to Playing</button>
+                    <button onClick={() => removeGameFromLibrary(game.id)}>Remove from Library</button>
                     </li>
                 ))}
             </ul>
