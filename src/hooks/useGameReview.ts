@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { fetchAllReviews } from "../apis/reviewRepository";
-import { tempGames } from "../assets/temp/tempGames";
+import {
+  filterReviewsByGameId,
+  findMatchingGameId,
+  getGameTitleById,
+  sortReviews,
+} from "../services/gameReviewService";
 import { useSelectedGameFilter } from "./useSelectedGameFilter";
 
 export function useGameReview() {
@@ -9,36 +14,28 @@ export function useGameReview() {
   const [searchTerm, setSearchTerm] = useState("");
   const [appliedSearchTerm, setAppliedSearchTerm] = useState("");
   const [selectedGameFromSearch, setSelectedGameFromSearch] = useState<number | null>(null);
-  const [allReviews, setAllReviews] = useState(fetchAllReviews());
+  const [allReviews, setAllReviews] = useState(sortReviews(fetchAllReviews()));
 
-  const getGameTitle = (id: number): string => {
-    const game = tempGames.find(g => g.id === id);
-    return game ? game.title : "Unknown Game";
-  };
+  const getGameTitle = (id: number): string => getGameTitleById(id);
 
   const activeGameId = selectedGameFromSearch ?? selectedGameId ?? undefined;
 
-  const reviewList = activeGameId
-    ? allReviews.filter(review => review.gameId === activeGameId)
-    : allReviews;
+  const reviewList = sortReviews(filterReviewsByGameId(allReviews, activeGameId));
 
   const applySearch = () => {
-    const term = searchTerm.trim().toLowerCase();
-    setAppliedSearchTerm(term);
+    const nextSearchTerm = searchTerm.trim().toLowerCase();
+    setAppliedSearchTerm(nextSearchTerm);
 
-    if (!term) {
+    if (!nextSearchTerm) {
       setSelectedGameFromSearch(null);
       return;
     }
 
-    const match = tempGames.find(game =>
-      game.title.toLowerCase().includes(term)
-    );
-    setSelectedGameFromSearch(match ? match.id : null);
+    setSelectedGameFromSearch(findMatchingGameId(nextSearchTerm));
   };
 
   const handleReviewAdded = () => {
-    setAllReviews(fetchAllReviews());
+    setAllReviews(sortReviews(fetchAllReviews()));
   };
 
   const handleResetAll = () => {
