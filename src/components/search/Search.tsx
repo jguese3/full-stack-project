@@ -1,18 +1,70 @@
-export function Search({searchValue, handleSearchChange}
-    : {
-        searchValue: string, 
-        handleSearchChange: (newValue: string) => void
-    }) {
-    return(
-        <form className="search-form" action="#">
-            {/* Note use of closing tags on inputs */}
-            <input type="text" 
-                name="field-term" 
-                placeholder="Enter username or id..." 
-                value={searchValue}
-                onChange={e => handleSearchChange(e.target.value)}
-            />
-            <input type="submit" value="Search" />
-        </form>
+import { useEffect, useState } from "react";
+import type { User } from "../../types/user";
+import { SearchBar } from "../common/search-bar/SearchBar";
+import { UserListDisplay } from "../user-list-display/UserListDisplay";
+import { fetchUsers, followUser, unfollowUser } from "../../apis/usersRepository";
+import { validateSearch } from "../../services/searchService";
+
+export function Search() {
+    const [users, setUsers] = useState<User[]>([]);
+    const [searchValue, setSearchValue] = useState<string>("");
+    const [messages, setMessages] = useState<string[]>([]);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        setUsers(fetchUsers());
+    }, []);
+
+    const handleSubmit = () => {
+        const validation = validateSearch(searchValue);
+
+        if (!validation.isValid) {
+            setMessages(validation.errors);
+            setFilteredUsers([]);
+            return;
+        }
+
+        setMessages([]);
+
+        const results = users.filter(user =>
+            user.userName.toLowerCase().includes(searchValue.toLowerCase())
+        );
+
+        setFilteredUsers(results);
+    };
+
+    const handleFollowToggle = async (id: number) => {
+        const user = users.find(u => u.id === id);
+        if (!user) return;
+
+        if (user.isFollowing) {
+            await unfollowUser(id);
+        } else {
+            await followUser(id);
+        }
+
+        setUsers(fetchUsers());
+    };
+
+    return (
+        <section className="friend-status">
+            <header>
+                <h2>Search Friends</h2>
+            </header>
+
+            <main>
+                <SearchBar
+                    searchValue={searchValue}
+                    messages={messages}
+                    handleSearchChange={setSearchValue}
+                    handleSubmit={handleSubmit}
+                />
+
+                <UserListDisplay
+                    users={filteredUsers}
+                    onFollowClick={handleFollowToggle}
+                />
+            </main>
+        </section>
     );
 }

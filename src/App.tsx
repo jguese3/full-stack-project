@@ -1,25 +1,18 @@
-import { useState } from 'react';
-
 import { Header } from './components/layout/header/header';
 import { Footer } from './components/layout/footer/footer';
 
 // Components imports
 import { AllGames } from './components/allGames/allGames';
 import { Friends } from './components/friends/Friends';
-import SearchFriends from './components/friends/SearchFriends';
+import { Search } from './components/search/Search';
 import { Following } from './components/friends/Following';
 import { GameReview } from './components/GameReview/GameReview';
 import { UserGames } from './components/userList/userGameList';
-
-// Mock data imports
-import type { User } from './assets/types/user';
-import { userData } from './assets/temp/tempUsers';
 
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 const App = () => {
-  const [users, setUsers] = useState<User[]>(userData);
 
   return (
     <>
@@ -29,15 +22,13 @@ const App = () => {
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/UserGames" element={<UserGames />} />
         <Route path="/reviews" element={<GameReview />} />
-        <Route
-          path="/friends"
-          element={
-            <>
-              <SearchFriends users={users} updateFollowing={setUsers} />
-              <Following users={users} updateFollowing={setUsers} />
-              <Friends />
-            </>
-          }
+        <Route path="/friends" element={
+          <>
+          <Search/>
+          <Following/>
+          <Friends />
+          </>
+        } 
         />
       </Routes>
       <Footer />

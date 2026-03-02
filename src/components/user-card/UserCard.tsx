@@ -1,4 +1,4 @@
-import type { User } from "../../assets/types/user";
+import type { User } from "../../types/user";
 import "./user-card.css";
 
 export function UserCard(
@@ -11,19 +11,19 @@ export function UserCard(
     : {
         user: User,
         isExpanded: boolean,
-        onUsernameClick: () => void,
-        onFollowClick: () => void
+        onUsernameClick: (id: number) => void,
+        onFollowClick: (id: number) => void
     }
 ) {
     return (
         <div className="user-card">
             <div className="user-card-top">
             {}
-            <h3 onClick={onUsernameClick}>
+            <h3 onClick={() => onUsernameClick(user.id)}>
                 {user.userName}
             </h3>
             {}
-            <button onClick={onFollowClick}>
+            <button onClick={() => onFollowClick(user.id)}>
                 {user.isFollowing ? "Unfollow" : "Follow"}
             </button>
             </div>

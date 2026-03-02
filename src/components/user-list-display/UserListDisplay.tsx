@@ -1,55 +1,35 @@
 import { useState } from "react";
 import { UserCard } from "../user-card/UserCard";
-import type { User } from "../../assets/types/user";
+import type { User } from "../../types/user";
 import "./user-list-display.css";
 
-export function UserListDisplay({
-    users,
-    updateFollowing
-}:
-{
-    users: User[],
-    updateFollowing: React.Dispatch<React.SetStateAction<User[]>>
-}) {
+export function UserListDisplay({users, onFollowClick}: 
+    {
+        users: User[], 
+        onFollowClick: (id: number) => void
+    }) {
     const [expandedId, setExpandedId] = useState<number|null>(null);
 
-    const handleUserFollowingClick = (userClicked: User): void => {
-        updateFollowing(oldUserState => {
-            return oldUserState.map(user => {
-                if(user.id === userClicked.id) {
-                    let newFollowing = !user.isFollowing;
-                    return {...user, isFollowing: newFollowing};
-                } else {
-                    return user;
-                }
-            })
-        });
-    }
-
-    const userListItems: JSX.Element[] = users.map((user) => {
+    const termListItems: JSX.Element[] = users.map((user) => {
         return (
             <UserCard
-                user={user}
-                isExpanded={user.id === expandedId}
-                onUsernameClick={
-                    () => {
-                        user.id !== expandedId ?
-                        setExpandedId(user.id) :
-                        setExpandedId(null);
+                user={user} 
+                isExpanded={user.id === expandedId} 
+                onUsernameClick={ 
+                    () => {user.id !== expandedId ? 
+                        setExpandedId(user.id) : 
+                        setExpandedId(null)
                     }
                 }
-                onFollowClick={() => {
-                    handleUserFollowingClick(user);
-                }}
-
-                key={user.id}
+                onFollowClick={onFollowClick}
+                key={user.id} 
             />
         )
     });
 
     return(
-        <div className="users-list">
-            {userListItems}
-        </div>
+        <ol className="users-list">
+            {termListItems}
+        </ol>
     )
 }
