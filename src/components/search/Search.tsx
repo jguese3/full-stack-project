@@ -42,8 +42,12 @@ export function Search() {
         } else {
             await followUser(id);
         }
+        
+        const updateUsers = users.map(u =>
+            u.id === id ? { ...u, isFollowing: !u.isFollowing } : u
+        );
 
-        setUsers(fetchUsers());
+        setUsers(updateUsers);
     };
 
     return (
