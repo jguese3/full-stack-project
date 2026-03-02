@@ -27,7 +27,7 @@ export function Search() {
         setMessages([]);
 
         const results = users.filter(user =>
-            user.userName.toLowerCase()
+            user.userName.toLowerCase().includes(searchValue.toLowerCase())
         );
 
         setFilteredUsers(results);
