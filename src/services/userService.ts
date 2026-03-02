@@ -18,3 +18,12 @@ export async function toggleFollowUser(userId: number) {
         );
     }
 }
+
+/**
+ * A straightforward request to get all users from the repository.
+ * @returns Promise<User[]>: an array of users
+ */
+export async function fetchUsers() {
+    const users = await UserRepo.fetchUsers();
+    return users;
+}
