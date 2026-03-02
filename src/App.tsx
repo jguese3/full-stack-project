@@ -15,7 +15,6 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 const App = () => {
-  const [users, setUsers] = useState<User[]>(userData);
 
   return (
     <>
