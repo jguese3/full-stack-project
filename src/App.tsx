@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Header } from './components/layout/header/header';
 import { Footer } from './components/layout/footer/footer';
 
@@ -23,7 +21,7 @@ const App = () => {
         <Route path="/" />
         <Route path="/all-games" element={<AllGames />} />
         <Route path="/UserGames" element={<UserGames />} />
-        <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} />} />
+        <Route path="/reviews" element={<GameReview />} />
         <Route path="/friends" element={
           <>
           <Search/>
