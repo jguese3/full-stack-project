@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/friends" element={
           <>
           <Search/>
-          <Following/>
+          <Following userFilterFn={(user) => user.isFollowing} userDependencies={[]}/>
           <Friends />
           </>
         } 
