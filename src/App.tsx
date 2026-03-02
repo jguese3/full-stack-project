@@ -9,12 +9,13 @@ import { Friends } from './components/friends/Friends';
 import { GameReview } from './components/GameReview/GameReview';
 import { AllGames } from './components/allGames/allGames';
 import { UserGames } from './components/userList/userGameList';
-import SearchFriends from './components/friends/SearchFriends';
+// import SearchFriends from './components/friends/SearchFriends';
 import { Following } from './components/friends/Following';
+import { Search } from './components/search/Search';
 
-// Mock data imports
-import type { User } from './types/user';
-import { userData } from './assets/temp/tempUsers';
+// // Mock data imports
+// import type { User } from './types/user';
+// import { userData } from './assets/temp/tempUsers';
 
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -33,9 +34,6 @@ function App() {
       setSelectedGameId(location.state.selectedGameId);
     }
   }, [location.state?.selectedGameId]);
-
-  // Shared state concerning user data
-  const [users, setUsers] = useState<User[]>(userData);
   
   return (
     <>
@@ -49,8 +47,8 @@ function App() {
         <Route path="/reviews" element={<GameReview selectedReviewId={selectedReviewId} setSelectedReviewId={setSelectedReviewId} />} />
         <Route path="/friends" element={
           <>
-          <SearchFriends users={users} updateFollowing={setUsers} />
-          <Following users={users} updateFollowing={setUsers} />
+          <Search/>
+          <Following/>
           <Friends />
           </>
         } 

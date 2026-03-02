@@ -16,7 +16,7 @@ export const userData: User[] = [
   { id: 12, userName: "manaPotion", bio: "Refilling energy since level one.", isFollowing: false, ownedGameIds: [11, 4] },
   { id: 13, userName: "finalBoss", bio: "You’ll need a strategy.", isFollowing: false, ownedGameIds: [18, 20] },
   { id: 14, userName: "levelUp", bio: "Progress is the goal.", isFollowing: false, ownedGameIds: [5, 12, 14] },
-  { id: 15, userName: "stealthBuild", bio: "You won’t see me coming.", isFollowing: false, ownedGameIds: [18, 17] },
+  { id: 15, userName: "stealthBuild", bio: "You won’t see me coming.", isFollowing: true, ownedGameIds: [18, 17] },
   { id: 16, userName: "npcEnergy", bio: "Just vibing in the background.", isFollowing: false, ownedGameIds: [3] },
   { id: 17, userName: "hardcoreMode", bio: "No checkpoints allowed.", isFollowing: false, ownedGameIds: [18, 4, 2] },
   { id: 18, userName: "coopPlayer", bio: "Best games are better together.", isFollowing: false, ownedGameIds: [6, 7, 15] },

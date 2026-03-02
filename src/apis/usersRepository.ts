@@ -40,6 +40,6 @@ export async function unfollowUser(userId: number) {
     } else {
         foundUser.isFollowing = false;
     }
-
+    console.log("User unfollowed:", foundUser);
     return foundUser;
 }

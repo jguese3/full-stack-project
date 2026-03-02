@@ -1,44 +1,70 @@
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSearch } from "../../hooks/useSearch";
+import type { User } from "../../types/user";
 import { SearchBar } from "../common/search-bar/SearchBar";
+import { UserListDisplay } from "../user-list-display/UserListDisplay";
+import { fetchUsers, followUser, unfollowUser } from "../../apis/usersRepository";
+import { validateSearch } from "../../services/searchService";
 
 export function Search() {
-    const {
-        searchValue,
-        setSearchValue,
-        trySearch
-    } = useSearch();
-
-    const [searchMessages, setSearchMessages] = useState<string[]>([]);
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const doSearch = () => {
-        const validation = trySearch();
-        if(validation.isValid) {
-            navigate(`/users/search?value=${searchValue}`);
-            setSearchMessages([]);
-            setSearchValue("");
-        } else {
-            setSearchMessages(validation.errors);
-        }
-    }
+    const [users, setUsers] = useState<User[]>([]);
+    const [searchValue, setSearchValue] = useState<string>("");
+    const [messages, setMessages] = useState<string[]>([]);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
     useEffect(() => {
-        setSearchValue("");
-        setSearchMessages([]);
-    }, [location]);
+        setUsers(fetchUsers());
+    }, []);
 
-    return(
-        <div>
-            <SearchBar
-                searchValue={searchValue}
-                messages={searchMessages}
-                handleSearchChange={setSearchValue}
-                handleSubmit={doSearch}
-            />
-        </div>
+    const handleSubmit = () => {
+        const validation = validateSearch(searchValue);
+
+        if (!validation.isValid) {
+            setMessages(validation.errors);
+            setFilteredUsers([]);
+            return;
+        }
+
+        setMessages([]);
+
+        const results = users.filter(user =>
+            user.userName.toLowerCase()
+        );
+
+        setFilteredUsers(results);
+    };
+
+    const handleFollowToggle = async (id: number) => {
+        const user = users.find(u => u.id === id);
+        if (!user) return;
+
+        if (user.isFollowing) {
+            await unfollowUser(id);
+        } else {
+            await followUser(id);
+        }
+
+        setUsers(fetchUsers());
+    };
+
+    return (
+        <section className="friend-status">
+            <header>
+                <h2>Search Friends</h2>
+            </header>
+
+            <main>
+                <SearchBar
+                    searchValue={searchValue}
+                    messages={messages}
+                    handleSearchChange={setSearchValue}
+                    handleSubmit={handleSubmit}
+                />
+
+                <UserListDisplay
+                    users={filteredUsers}
+                    onFollowClick={handleFollowToggle}
+                />
+            </main>
+        </section>
     );
 }
