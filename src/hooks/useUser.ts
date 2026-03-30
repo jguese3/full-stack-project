@@ -27,13 +27,17 @@ export function useUser(
     
     const toggleFollow = async(userId: number) => {
         try {
-            await UserService.toggleFollowUser(userId);
-
+            const user = users.find((u) => u.id === userId);
+            if (!user) {
+                throw new Error("User not found");
+            }
+            
+            await UserService.toggleFollowUser(user);
             await fetchUsers();
         } catch(errorObject) {
             setError(`${errorObject}`);
         }   
-    }
+    };
 
     useEffect(() => {
         fetchUsers();
