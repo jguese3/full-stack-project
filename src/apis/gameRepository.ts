@@ -1,34 +1,43 @@
-import type { Game } from '../assets/temp/tempGames';
-import { tempUserGames } from '../assets/temp/tempUserGames';
+import type { Game } from "../assets/temp/tempGames";
 
-let userGames: Game[] = tempUserGames;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000";
 
-export function fetchAllUserGames(): Game[] {
-    return userGames;
+export async function fetchAllUserGames(): Promise<Game[]> {
+  const response = await fetch(`${API_BASE_URL}/user-games`);
+  if (!response.ok) throw new Error("Failed to fetch user games");
+  return response.json();
 }
 
-export function addUserGame(newGame: Game): Game {
-    userGames.push(newGame);
-    return newGame;
+export async function addUserGame(newGame: Game): Promise<Game> {
+  const response = await fetch(`${API_BASE_URL}/user-games`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: newGame.title,
+      platform: newGame.platform,
+      status: newGame.status,
+    }),
+  });
+
+  if (!response.ok) throw new Error("Failed to add user game");
+  return response.json();
 }
 
-export function updateUserGame(gameId: number, newStatus: string): Game {
-    const gameIndex = userGames.findIndex(game => game.id === gameId);
-    if (gameIndex === -1) {
-        throw new Error("Game not found");
-    }
+export async function updateUserGame(gameId: number, newStatus: string): Promise<Game> {
+  const response = await fetch(`${API_BASE_URL}/user-games/${gameId}/status`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: newStatus }),
+  });
 
-    userGames[gameIndex].status = newStatus;
-    return userGames[gameIndex];
+  if (!response.ok) throw new Error("Failed to update user game");
+  return response.json();
 }
 
-export function removeUserGame(gameId: number): Game {
-    const gameIndex = userGames.findIndex(game => game.id === gameId);
-    if (gameIndex === -1) {
-        throw new Error("Game not found");
-    }
+export async function removeUserGame(gameId: number): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/user-games/${gameId}`, {
+    method: "DELETE",
+  });
 
-    const removedGame = userGames[gameIndex];
-    userGames.splice(gameIndex, 1);
-    return removedGame;
+  if (!response.ok) throw new Error("Failed to remove user game");
 }
