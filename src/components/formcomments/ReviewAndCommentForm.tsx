@@ -6,7 +6,7 @@ interface ReviewFormProps {
   type: "review";
   gameId: number;
   gameTitle: string;
-  onSubmitSuccess: () => void;
+  onSubmitSuccess: () => void | Promise<void>;
 }
 
 interface CommentFormProps {
@@ -64,7 +64,7 @@ export const ReviewAndCommentForm: React.FC<ReviewAndCommentFormProps> = (props)
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          submitForm();
+          void submitForm();
         }}
         className="comment-form"
       >

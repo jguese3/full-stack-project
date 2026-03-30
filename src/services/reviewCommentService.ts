@@ -39,7 +39,7 @@ export function buildComment(params: {
 }
 
 export function sortComments(comments: Comment[]): Comment[] {
-  return [...comments].sort((a, b) => b.id - a.id);
+  return [...comments].sort((a, b) => a.id - b.id);
 }
 
 export function buildReview(params: {

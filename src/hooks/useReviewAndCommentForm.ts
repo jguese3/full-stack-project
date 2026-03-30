@@ -9,7 +9,7 @@ import {
 } from "../services/reviewCommentService";
 import type { Comment } from "../types/comment";
 
-type ReviewConfig = { type: "review"; gameId: number; onSubmitSuccess: () => void };
+type ReviewConfig = { type: "review"; gameId: number; onSubmitSuccess: () => void | Promise<void> };
 type CommentConfig = { type: "comment"; reviewId: number };
 type FormConfig = ReviewConfig | CommentConfig;
 
@@ -23,40 +23,44 @@ export function useReviewAndCommentForm(config: FormConfig) {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(5);
 
-  function submitForm() {
+  async function submitForm() {
     try {
       validateReviewOrCommentInput(username, text);
+
+      if (config.type === "comment") {
+        const existing = fetchAllComments();
+        const newComment: Comment = buildComment({
+          reviewId: config.reviewId,
+          username,
+          text,
+          existingComments: existing,
+        });
+
+        addComment(newComment);
+        setCommentList(prev => sortComments([...prev, newComment]));
+      } else {
+        const newReview = buildReview({
+          gameId: config.gameId,
+          username,
+          text,
+          rating,
+        });
+
+        await addReview(newReview);
+        await config.onSubmitSuccess();
+      }
+
+      setUsername("");
+      setText("");
+      setRating(5);
     } catch (error) {
-      alert("Please fill in all fields");
-      return;
+      if (error instanceof Error) {
+        alert(error.message);
+        return;
+      }
+
+      alert("Failed to submit form. Please try again.");
     }
-
-    if (config.type === "comment") {
-      const existing = fetchAllComments();
-      const newComment: Comment = buildComment({
-        reviewId: config.reviewId,
-        username,
-        text,
-        existingComments: existing,
-      });
-
-      addComment(newComment);
-      setCommentList(prev => sortComments([...prev, newComment]));
-    } else {
-      const newReview = buildReview({
-        gameId: config.gameId,
-        username,
-        text,
-        rating,
-      });
-
-      addReview(newReview);
-      config.onSubmitSuccess();
-    }
-
-    setUsername("");
-    setText("");
-    setRating(5);
   }
 
   return {
