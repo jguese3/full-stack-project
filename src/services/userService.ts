@@ -6,16 +6,11 @@ import type { User } from "../types/user";
  * input if they want to follow or unfollow a user.
  * @param userId: the id of the user to be followed/unfollowed
  */
-export async function toggleFollowUser(userId: number) {
-    const user: User = await UserRepo.getUserById(userId);
+export async function toggleFollowUser(user: User) {
     if(user.isFollowing) {
-        await UserRepo.unfollowUser(
-            user.id,
-        );
+        await UserRepo.unfollowUser(user);
     } else {
-        await UserRepo.followUser(
-            user.id,
-        );
+        await UserRepo.followUser(user);
     }
 }
 
