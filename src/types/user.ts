@@ -3,5 +3,4 @@ export type User = {
     userName: string;
     bio: string;
     isFollowing: boolean;
-    ownedGameIds: number[];
 }

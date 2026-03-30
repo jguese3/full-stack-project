@@ -12,7 +12,12 @@ export function Search() {
     const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
     useEffect(() => {
-        setUsers(fetchUsers());
+        const loadUsers = async () => {
+            const data = await fetchUsers();
+            setUsers(data);
+        };
+
+        loadUsers();
     }, []);
 
     const handleSubmit = () => {
@@ -38,16 +43,21 @@ export function Search() {
         if (!user) return;
 
         if (user.isFollowing) {
-            await unfollowUser(id);
+            await unfollowUser(user);
         } else {
-            await followUser(id);
+            await followUser(user);
         }
         
         const updateUsers = users.map(u =>
             u.id === id ? { ...u, isFollowing: !u.isFollowing } : u
         );
 
+        const updatedFilteredUsers = filteredUsers.map(u =>
+            u.id === id ? { ...u, isFollowing: !u.isFollowing } : u
+        );
+
         setUsers(updateUsers);
+        setFilteredUsers(updatedFilteredUsers);
     };
 
     return (
