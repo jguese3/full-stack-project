@@ -17,7 +17,7 @@ export const userData: User[] = [
   { id: 13, userName: "finalBoss", bio: "You’ll need a strategy.", isFollowing: false },
   { id: 14, userName: "levelUp", bio: "Progress is the goal.", isFollowing: false },
   { id: 15, userName: "stealthBuild", bio: "You won’t see me coming.", isFollowing: true },
-  { id: 16, userName: "npcEnergy", bio: "Just vibing in the background.", isFollowing: },
+  { id: 16, userName: "npcEnergy", bio: "Just vibing in the background.", isFollowing: true},
   { id: 17, userName: "hardcoreMode", bio: "No checkpoints allowed.", isFollowing: false },
   { id: 18, userName: "coopPlayer", bio: "Best games are better together.", isFollowing: false },
   { id: 19, userName: "patchNotes", bio: "Reading what everyone skips.", isFollowing: false },

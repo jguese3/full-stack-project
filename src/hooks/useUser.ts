@@ -27,7 +27,7 @@ export function useUser(
     
     const toggleFollow = async(userId: number) => {
         try {
-            const user = users.find(u) => u.id === userId);
+            const user = users.find((u) => u.id === userId);
             if (!user) {
                 throw new Error("User not found");
             }
