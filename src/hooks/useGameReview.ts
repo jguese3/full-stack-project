@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAllReviews } from "../apis/reviewRepository";
 import {
   filterReviewsByGameId,
@@ -7,6 +7,7 @@ import {
   sortReviews,
 } from "../services/gameReviewService";
 import { useSelectedGameFilter } from "./useSelectedGameFilter";
+import type { Review } from "../types/reviewtype";
 
 export function useGameReview() {
   const [selectedReviewId, setSelectedReviewId] = useState<number>(1);
@@ -14,7 +15,18 @@ export function useGameReview() {
   const [searchTerm, setSearchTerm] = useState("");
   const [appliedSearchTerm, setAppliedSearchTerm] = useState("");
   const [selectedGameFromSearch, setSelectedGameFromSearch] = useState<number | null>(null);
-  const [allReviews, setAllReviews] = useState(sortReviews(fetchAllReviews()));
+  const [allReviews, setAllReviews] = useState<Review[]>([]);
+
+  const loadReviews = async () => {
+    const reviews = await fetchAllReviews();
+    setAllReviews(sortReviews(reviews));
+  };
+
+  useEffect(() => {
+    loadReviews().catch((error) => {
+      console.error("Failed to load reviews:", error);
+    });
+  }, []);
 
   const getGameTitle = (id: number): string => getGameTitleById(id);
 
@@ -34,8 +46,8 @@ export function useGameReview() {
     setSelectedGameFromSearch(findMatchingGameId(nextSearchTerm));
   };
 
-  const handleReviewAdded = () => {
-    setAllReviews(sortReviews(fetchAllReviews()));
+  const handleReviewAdded = async () => {
+    await loadReviews();
   };
 
   const handleResetAll = () => {
