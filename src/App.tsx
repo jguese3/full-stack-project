@@ -3,7 +3,6 @@ import { Footer } from './components/layout/footer/footer';
 
 // Components imports
 import { AllGames } from './components/allGames/allGames';
-import { Friends } from './components/friends/Friends';
 import { Search } from './components/search/Search';
 import { Following } from './components/friends/Following';
 import { GameReview } from './components/GameReview/GameReview';
@@ -26,7 +25,6 @@ const App = () => {
           <>
           <Search/>
           <Following userFilterFn={(user) => user.isFollowing} userDependencies={[]}/>
-          <Friends />
           </>
         } 
         />
