@@ -1,58 +1,77 @@
 import type { User } from "../types/user";
 
-type UsersResponseJSON = { message: string; data: User[] };
-type UserResponseJSON = { message: string; data: User };
+type UsersResponseJSON = {message: String, data: User[]};
+type UserResponseJSON = {message: String, data: User};
 
-const BASE_URL = `${import.meta.env.VITE_API_ASE_URL}/api/v1`;
-const USER_ENDPOINT = "/users";
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api/v1`;
+const USER_ENDPOINT = "/users"
 
-// Get all users
 export async function fetchUsers(): Promise<User[]> {
     const userResponse: Response = await fetch(
         `${BASE_URL}${USER_ENDPOINT}`
     );
 
+    if(!userResponse.ok) {
+        throw new Error("Failed to fetch user");
+    }
+
+    const json: UsersResponseJSON = await userResponse.json();
+    return json.data;
+}
+
+export async function getUserById(userId: number): Promise<User> {
+    const userResponse: Response = await fetch(
+        `${BASE_URL}${USER_ENDPOINT}/${userId}`
+    );
+
     if (!userResponse.ok) {
-        throw new Error("Failed to fetch users");
+        throw new Error(`Failed to fetch user with ID: ${userId}`);
     }
 
     const json: UserResponseJSON = await userResponse.json();
     return json.data;
 }
-// Get user by Id
-export function getUserById(userId: number): User {
-    const foundUser = userData.find(u => u.id === userId);
 
-    if(!foundUser) {
-        throw new Error(`Failed to fetch user with ID: ${userId}`)
+export async function followUser(user: User): Promise<User> {
+    user.isFollowing = true;
+
+    const updateResponse: Response = await fetch(
+        `${BASE_URL}${USER_ENDPOINT}/${user.id}`,
+        {
+            method: "PUT",
+            body: JSON.stringify({...user}),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    if (!updateResponse.ok) {
+        throw new Error(`Failed to follow user with ID ${user.id}`)
     }
 
-    return foundUser;
+    const json: UserResponseJSON = await updateResponse.json();
+    return json.data;
 }
 
-// Add following
-export async function followUser(userId: number) {
-    const foundUser = userData.find(u => u.id === userId);
+export async function unfollowUser(user: User): Promise<User> {
+    user.isFollowing = false;
 
-    if(!foundUser) {
-        throw new Error(`Failed to fetch user with ID: ${userId}`);
-    } else {
-        foundUser.isFollowing = true;
+    const updateResponse: Response = await fetch(
+        `${BASE_URL}${USER_ENDPOINT}/${user.id}`,
+        {
+            method: "PUT",
+            body: JSON.stringify({...user}),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    if (!updateResponse.ok) {
+        throw new Error(`Failed to unfollow user with ID ${user.id}`)
     }
 
-    return userData.find(u => u.id === userId)!;
-}
-
-// Delete following
-export async function unfollowUser(userId: number) {
-    const foundUser = userData.find(u => u.id === userId);
-
-    if(!foundUser) {
-        throw new Error(`Failed to fetch user with ID: ${userId}`);
-    } else {
-        foundUser.isFollowing = false;
-    }
-
-    console.log("User unfollowed:", foundUser);
-    return userData.find(u => u.id === userId)!;
+    const json: UserResponseJSON = await updateResponse.json();
+    return json.data;
 }
