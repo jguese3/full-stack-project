@@ -19,13 +19,13 @@ export async function fetchUsers(): Promise<User[]> {
     return json.data;
 }
 
-export async function getUserById(userId: number): Promise<User> {
+export async function getUserByUsername(userName: string): Promise<User> {
     const userResponse: Response = await fetch(
-        `${BASE_URL}${USER_ENDPOINT}/${userId}`
+        `${BASE_URL}${USER_ENDPOINT}/${userName}`
     );
 
     if (!userResponse.ok) {
-        throw new Error(`Failed to fetch user with ID: ${userId}`);
+        throw new Error(`Failed to fetch user with username: ${userName}`);
     }
 
     const json: UserResponseJSON = await userResponse.json();
